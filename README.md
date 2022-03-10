@@ -1,6 +1,6 @@
 # Etch a Sketch
 
-# Refactored version of [etch a sketch](https://github.com/htder/etch-a-sketch), created when first learning Javascipt.
+### Refactored version of [etch a sketch](https://github.com/htder/etch-a-sketch), created when first learning Javascipt.
 
 --- 
 The goal of this refactoring is to:
