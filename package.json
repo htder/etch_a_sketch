@@ -1,0 +1,24 @@
+{
+  "name": "etch_a_sketch",
+  "version": "1.0.0",
+  "description": "### Refactored version of [etch a sketch](https://github.com/htder/etch-a-sketch), created when first learning Javascipt.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/htder/etch_a_sketch.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/htder/etch_a_sketch/issues"
+  },
+  "homepage": "https://github.com/htder/etch_a_sketch#readme",
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
+  }
+}
