@@ -27,12 +27,12 @@ function cellOn() {
   this.style.backgroundColor = 'black';
 }
 
-function touchDown() {
+function touchDown(event) {
   event.preventDefault();
   this.style.backgroundColor = 'black';
 }
 
-function touchMove() {
+function touchMove(event) {
   event.preventDefault();
   const target = document.elementFromPoint(
     event.changedTouches[0].clientX,
@@ -41,6 +41,14 @@ function touchMove() {
   if (target.classList.contains('cell')) {
     target.style.backgroundColor = 'black';
   }
+}
+
+function removeCellEventListener(cells) {
+  cells.forEach((cell) => {
+    cell.removeEventListener('mouseenter', cellOn);
+    cell.removeEventListener('touchstart', touchDown);
+    cell.removeEventListener('touchmove', touchMove);
+  });
 }
 
 function cellsActiveListener() {
@@ -54,7 +62,5 @@ function cellsActiveListener() {
 
 resetButton.addEventListener('click', () => {
   const cells = Array.from(document.querySelectorAll('.cell'));
-  cells.forEach((cell) => {
-    cell.removeEventListener('mouseenter', cellOn);
-  });
+  removeCellEventListener(cells);
 });
