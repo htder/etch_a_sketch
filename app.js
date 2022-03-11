@@ -1,24 +1,89 @@
-const initialGridSize = 16;
+const initialGridSize = 10;
 
 const resetButton = document.querySelector('.reset');
 const gridContainer = document.querySelector('.grid-container');
+const topInfo = document.querySelector('.info');
 const slider = document.querySelector('.slider');
 const sliderDisplayValue = document.querySelector('.slider-value');
+const root = document.getElementsByTagName('html')[0];
 
 function createGrid(gridSize) {
-  const screenWidth = window.screen.availWidth;
-  const gridCellDimension = `${screenWidth / gridSize}px`;
-  for (let i = 0; i < gridSize * gridSize; i += 1) {
+  const rootFontSize = window
+    .getComputedStyle(root)
+    .getPropertyValue('font-size')
+    .split('px');
+
+  const windowHeight = window.screen.availHeight;
+  const windowWidth = window.screen.availWidth;
+  console.log('Total Height: ' + windowHeight);
+  const headerHeight = topInfo.offsetHeight;
+  console.log('Header Height: ' + headerHeight);
+  gridContainer.style.height = `${
+    windowHeight - headerHeight - 1 * rootFontSize[0]
+  }px`;
+  const gridHeight = gridContainer.offsetHeight;
+  console.log('Grid Height: ' + gridHeight);
+  gridContainer.style.width = `${windowWidth - 1 * rootFontSize[0]}px`;
+  const gridWidth = gridContainer.offsetWidth;
+  console.log('Grid Width: ' + gridWidth);
+
+  // The width of a single cell -> width of container / number of cells
+  const widthOfCell = gridWidth / gridSize;
+  console.log(widthOfCell + 'px');
+
+  const columns = gridSize;
+  const rows = gridHeight / widthOfCell;
+  // const rows = Math.ceil(gridHeight / widthOfCell);
+  console.log(rows + ' x ' + columns);
+  // const div = gridContainer.getBoundingClientRect();
+  // const gridContainerWidth = div.width;
+  // const gridContainerHeight = div.height;
+  // gridContainer.style.height = `${gridContainerHeight}px`;
+  // console.log('Width: ' + gridContainerWidth);
+
+  // const gridCellDim = gridContainerWidth / gridSize;
+  // const numberOfRows = gridContainerHeight / gridSize;
+  // console.log(gridSize, numberOfRows);
+  // console.log(gridCellDim);
+  // console.log(gridSize * numberOfRows);
+
+  console.log(columns * Math.ceil(rows));
+  for (let i = 0; i < columns * Math.ceil(rows); i += 1) {
     const gridCell = document.createElement('div');
     gridCell.classList.add('cell');
-    gridCell.style.width = gridCellDimension;
-    gridCell.style.height = gridCellDimension;
-    gridCell.style.border = '1px solid black';
+    gridCell.style.width = widthOfCell;
+    gridCell.style.height = widthOfCell;
+    gridCell.style.backgroundColor = 'blue';
     gridContainer.appendChild(gridCell);
   }
-  gridContainer.style.gridTemplateRows = `repeat(${gridSize}, ${gridCellDimension}`;
-  gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, ${gridCellDimension}`;
+  gridContainer.style.gridTemplateRows = `repeat(${rows}, ${widthOfCell}px`;
+  gridContainer.style.gridTemplateColumns = `repeat(${columns}, ${widthOfCell}px`;
   cellsActiveListener();
+
+  // console.log(gridContainerWidth, gridContainerHeight);
+  // const screenWidth = window.screen.availWidth;
+  // const screenHeight = window.screen.availHeight;
+  // const gridCellDimension = `${screenWidth / gridSize}px`;
+  // console.log('Height: ' + screenHeight);
+  // console.log('Width: ' + screenWidth);
+  // console.log(gridCellDimension);
+  // for (let i = 0; i < gridSize * gridSize; i += 1) {
+  //   const gridCell = document.createElement('div');
+  //   gridCell.classList.add('cell');
+  //   gridCell.style.width = gridCellDimension;
+  //   gridCell.style.height = gridCellDimension;
+  //   gridCell.style.border = '1px solid black';
+  //   gridContainer.appendChild(gridCell);
+  // }
+  // gridContainer.style.gridTemplateRows = `repeat(${gridSize}, ${gridCellDimension}`;
+  // gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, ${gridCellDimension}`;
+  // cellsActiveListener();
+}
+
+function removeGrid() {
+  while (gridContainer.firstChild) {
+    gridContainer.removeChild(gridContainer.lastChild);
+  }
 }
 
 createGrid(initialGridSize);
@@ -63,4 +128,6 @@ function cellsActiveListener() {
 resetButton.addEventListener('click', () => {
   const cells = Array.from(document.querySelectorAll('.cell'));
   removeCellEventListener(cells);
+  removeGrid();
+  createGrid(initialGridSize);
 });
