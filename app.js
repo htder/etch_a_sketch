@@ -38,7 +38,9 @@ function touchMove() {
     event.changedTouches[0].clientX,
     event.changedTouches[0].clientY
   );
-  target.style.backgroundColor = 'black';
+  if (target.classList.contains('cell')) {
+    target.style.backgroundColor = 'black';
+  }
 }
 
 function cellsActiveListener() {
