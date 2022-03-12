@@ -26,7 +26,7 @@ slider.addEventListener('touchend', (e) => {
 
 slider.addEventListener('input', (e) => {
   // removeColorFromGrid();
-  sliderDisplayValue.textContent = slider.value;
+  sliderDisplayValue.textContent = `Grid Width: ${slider.value}`;
 });
 
 function createGrid(gridSize) {
