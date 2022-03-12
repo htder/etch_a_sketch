@@ -1,4 +1,4 @@
-const initialGridSize = 16;
+const initialGridSize = 10;
 
 const resetButton = document.querySelector('.reset');
 const gridContainer = document.querySelector('.grid-container');
@@ -7,12 +7,12 @@ const slider = document.querySelector('.slider');
 const sliderDisplayValue = document.querySelector('.slider-value');
 const root = document.getElementsByTagName('html')[0];
 
-function removeColorFromGrid() {
-  const cells = Array.from(document.querySelectorAll('.cell'));
-  cells.forEach((cell) => {
-    cell.style.backgroundColor = 'blue';
-  });
-}
+// function removeColorFromGrid() {
+//   const cells = Array.from(document.querySelectorAll('.cell'));
+//   cells.forEach((cell) => {
+//     cell.style.backgroundColor = 'blue';
+//   });
+// }
 
 slider.addEventListener('mouseup', (e) => {
   removeGrid();
@@ -25,8 +25,8 @@ slider.addEventListener('touchend', (e) => {
 });
 
 slider.addEventListener('input', (e) => {
-  removeColorFromGrid();
-  // sliderDisplayValue.textContent = slider.value;
+  // removeColorFromGrid();
+  sliderDisplayValue.textContent = slider.value;
 });
 
 function createGrid(gridSize) {
@@ -38,17 +38,14 @@ function createGrid(gridSize) {
   const windowHeight = window.screen.availHeight;
   const windowWidth = window.screen.availWidth;
   const headerHeight = topInfo.offsetHeight;
-  // Accounting for height of header and grid gap to
-  // show background color, emulating a border
   gridContainer.style.height = `${
-    windowHeight - headerHeight - 1 - 1 * rootFontSize[0]
+    windowHeight - headerHeight - 1 * rootFontSize[0]
   }px`;
-  gridContainer.style.width = `${windowWidth - 1 - 1 * rootFontSize[0]}px`;
+  gridContainer.style.width = `${windowWidth - 1 * rootFontSize[0]}px`;
   const gridHeight = gridContainer.offsetHeight;
   const gridWidth = gridContainer.offsetWidth;
 
-  // Accounting for 1px grid gap to show background color (black)
-  const widthOfCell = gridWidth / gridSize - 1.05;
+  const widthOfCell = gridWidth / gridSize;
   const columns = gridSize;
   const rows = gridHeight / widthOfCell;
 
@@ -66,6 +63,7 @@ function createGrid(gridSize) {
     gridCell.style.backgroundColor = 'white';
     gridContainer.appendChild(gridCell);
   }
+
   gridContainer.style.gridTemplateRows = `repeat(${rows}, ${widthOfCell}px`;
   gridContainer.style.gridTemplateColumns = `repeat(${columns}, ${widthOfCell}px`;
   cellsActiveListener();
