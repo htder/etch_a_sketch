@@ -11,4 +11,12 @@ body {
 .grid-container {
   display: grid;
   margin: 0 auto;
+  gap: 1px;
+  background-color: black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+}
+
+.cell {
 }
