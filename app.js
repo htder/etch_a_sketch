@@ -1,4 +1,4 @@
-const initialGridSize = 10;
+const initialGridSize = 16;
 
 const resetButton = document.querySelector('.reset');
 const gridContainer = document.querySelector('.grid-container');
@@ -6,6 +6,28 @@ const topInfo = document.querySelector('.info');
 const slider = document.querySelector('.slider');
 const sliderDisplayValue = document.querySelector('.slider-value');
 const root = document.getElementsByTagName('html')[0];
+
+function removeColorFromGrid() {
+  const cells = Array.from(document.querySelectorAll('.cell'));
+  cells.forEach((cell) => {
+    cell.style.backgroundColor = 'blue';
+  });
+}
+
+slider.addEventListener('mouseup', (e) => {
+  removeGrid();
+  createGrid(slider.value);
+});
+
+slider.addEventListener('touchend', (e) => {
+  removeGrid();
+  createGrid(slider.value);
+});
+
+slider.addEventListener('input', (e) => {
+  removeColorFromGrid();
+  sliderDisplayValue.textContent = slider.value;
+});
 
 function createGrid(gridSize) {
   const rootFontSize = window
