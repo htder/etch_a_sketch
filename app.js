@@ -7,20 +7,6 @@ const slider = document.querySelector('.slider');
 const sliderDisplayValue = document.querySelector('.slider-value');
 const root = document.getElementsByTagName('html')[0];
 
-slider.addEventListener('mouseup', (e) => {
-  removeGrid();
-  createGrid(slider.value);
-});
-
-slider.addEventListener('touchend', (e) => {
-  removeGrid();
-  createGrid(slider.value);
-});
-
-slider.addEventListener('input', (e) => {
-  sliderDisplayValue.textContent = `Grid Width: ${slider.value}`;
-});
-
 function createGrid(gridSize) {
   const rootFontSize = window
     .getComputedStyle(root)
@@ -38,10 +24,6 @@ function createGrid(gridSize) {
   gridContainer.style.height = `${
     windowHeight - headerHeight - 1 * rootFontSize[0]
   }px`;
-  console.log(
-    `Window Height: ${windowHeight}, Header height: ${headerHeight}, font-size: ${rootFontSize[0]}`
-  );
-  console.log(`${windowHeight - headerHeight - 1 * rootFontSize[0]}px`);
   gridContainer.style.width = `${windowWidth - 1 * rootFontSize[0]}px`;
   const gridHeight = gridContainer.offsetHeight;
   const gridWidth = gridContainer.offsetWidth;
@@ -49,12 +31,6 @@ function createGrid(gridSize) {
   const widthOfCell = gridWidth / gridSize;
   const columns = gridSize;
   const rows = gridHeight / widthOfCell;
-
-  console.log('Total Height: ' + windowHeight);
-  console.log('Header Height: ' + headerHeight);
-  console.log('Grid Height: ' + gridHeight);
-  console.log('Grid Width: ' + gridWidth);
-  console.log(rows + ' x ' + columns);
 
   for (let i = 0; i < columns * Math.ceil(rows); i += 1) {
     const gridCell = document.createElement('div');
@@ -67,10 +43,7 @@ function createGrid(gridSize) {
 
   gridContainer.style.gridTemplateRows = `repeat(${rows}, ${widthOfCell}px`;
   gridContainer.style.gridTemplateColumns = `repeat(${columns}, ${widthOfCell}px`;
-  cellsActiveListener();
 }
-
-createGrid(initialGridSize);
 
 function removeGrid() {
   while (gridContainer.firstChild) {
@@ -114,6 +87,23 @@ function cellsActiveListener() {
     cell.addEventListener('touchmove', touchMove);
   });
 }
+
+createGrid(initialGridSize);
+cellsActiveListener();
+
+slider.addEventListener('mouseup', () => {
+  removeGrid();
+  createGrid(slider.value);
+});
+
+slider.addEventListener('touchend', () => {
+  removeGrid();
+  createGrid(slider.value);
+});
+
+slider.addEventListener('input', () => {
+  sliderDisplayValue.textContent = `Grid Width: ${slider.value}`;
+});
 
 resetButton.addEventListener('click', () => {
   const cells = Array.from(document.querySelectorAll('.cell'));
