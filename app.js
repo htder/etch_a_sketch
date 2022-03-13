@@ -7,13 +7,6 @@ const slider = document.querySelector('.slider');
 const sliderDisplayValue = document.querySelector('.slider-value');
 const root = document.getElementsByTagName('html')[0];
 
-// function removeColorFromGrid() {
-//   const cells = Array.from(document.querySelectorAll('.cell'));
-//   cells.forEach((cell) => {
-//     cell.style.backgroundColor = 'blue';
-//   });
-// }
-
 slider.addEventListener('mouseup', (e) => {
   removeGrid();
   createGrid(slider.value);
@@ -25,7 +18,6 @@ slider.addEventListener('touchend', (e) => {
 });
 
 slider.addEventListener('input', (e) => {
-  // removeColorFromGrid();
   sliderDisplayValue.textContent = `Grid Width: ${slider.value}`;
 });
 
@@ -37,6 +29,11 @@ function createGrid(gridSize) {
 
   const windowHeight = window.screen.availHeight;
   const windowWidth = window.screen.availWidth;
+  if (windowWidth < 400) {
+    slider.setAttribute('max', 30);
+  } else if (windowWidth < 850) {
+    slider.setAttribute('max', 60);
+  }
   const headerHeight = topInfo.offsetHeight;
   gridContainer.style.height = `${
     windowHeight - headerHeight - 1 * rootFontSize[0]

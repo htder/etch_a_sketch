@@ -11,7 +11,7 @@ body {
 .grid-container {
   display: grid;
   margin: 0 auto;
-  background-color: black;
+  /* background-color: black; */
 }
 
 .cell {
