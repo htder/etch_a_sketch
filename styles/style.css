@@ -10,8 +10,7 @@ body {
 }
 .grid-container {
   display: grid;
-  margin: 0 auto;
-  /* background-color: black; */
+  margin: auto;
 }
 
 .cell {

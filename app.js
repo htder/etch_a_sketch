@@ -27,8 +27,8 @@ function createGrid(gridSize) {
     .getPropertyValue('font-size')
     .split('px');
 
-  const windowHeight = window.screen.availHeight;
-  const windowWidth = window.screen.availWidth;
+  const windowHeight = document.documentElement.getBoundingClientRect().height;
+  const windowWidth = document.documentElement.getBoundingClientRect().width;
   if (windowWidth < 400) {
     slider.setAttribute('max', 30);
   } else if (windowWidth < 850) {
@@ -38,6 +38,10 @@ function createGrid(gridSize) {
   gridContainer.style.height = `${
     windowHeight - headerHeight - 1 * rootFontSize[0]
   }px`;
+  console.log(
+    `Window Height: ${windowHeight}, Header height: ${headerHeight}, font-size: ${rootFontSize[0]}`
+  );
+  console.log(`${windowHeight - headerHeight - 1 * rootFontSize[0]}px`);
   gridContainer.style.width = `${windowWidth - 1 * rootFontSize[0]}px`;
   const gridHeight = gridContainer.offsetHeight;
   const gridWidth = gridContainer.offsetWidth;
