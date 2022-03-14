@@ -52,21 +52,22 @@ function removeGrid() {
   }
 }
 
+let previousCell;
+
 function cellOn() {
   const currentStyleValue = +/\d+/.exec(this.classList[1]);
-  if (currentStyleValue === 10) return;
+  if (currentStyleValue === 4) return;
   this.classList.remove(`colorCell${currentStyleValue}`);
-  this.classList.add(`colorCell${currentStyleValue + 2}`);
+  this.classList.add(`colorCell${currentStyleValue + 1}`);
   previousCell = this;
 }
 
-let previousCell;
 function touchDown(event) {
   event.preventDefault();
   const currentStyleValue = +/\d+/.exec(this.classList[1]);
-  if (currentStyleValue === 10) return;
+  if (currentStyleValue === 4) return;
   this.classList.remove(`colorCell${currentStyleValue}`);
-  this.classList.add(`colorCell${currentStyleValue + 2}`);
+  this.classList.add(`colorCell${currentStyleValue + 1}`);
   previousCell = this;
 }
 
@@ -78,9 +79,9 @@ function touchMove(event) {
   );
   if (target.classList.contains('cell') && target !== previousCell) {
     const currentStyleValue = +/\d+/.exec(target.classList[1]);
-    if (currentStyleValue === 10) return;
+    if (currentStyleValue === 4) return;
     target.classList.remove(`colorCell${currentStyleValue}`);
-    target.classList.add(`colorCell${currentStyleValue + 2}`);
+    target.classList.add(`colorCell${currentStyleValue + 1}`);
     previousCell = target;
   }
 }
