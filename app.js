@@ -6,14 +6,15 @@ const topInfo = document.querySelector('.info');
 const slider = document.querySelector('.slider');
 const sliderDisplayValue = document.querySelector('.slider-value');
 const root = document.getElementsByTagName('html')[0];
+const show = document.querySelector('.show');
 
 function createCells(container, columns, rows, widthOfCell) {
-  for (let i = 0; i < columns * Math.ceil(rows); i += 1) {
+  const total = columns * Math.ceil(rows);
+  for (let i = 0; i < total; i += 1) {
     const gridCell = document.createElement('div');
-    gridCell.classList.add('cell');
+    gridCell.classList = 'cell colorCell0';
     gridCell.style.width = widthOfCell;
     gridCell.style.height = widthOfCell;
-    gridCell.classList.add('colorCell0');
     container.appendChild(gridCell);
   }
 }
@@ -21,15 +22,17 @@ function createCells(container, columns, rows, widthOfCell) {
 function setMaxSlider() {
   const windowWidth = document.documentElement.getBoundingClientRect().width;
   if (windowWidth < 400) {
-    slider.setAttribute('max', 30);
+    slider.setAttribute('max', 25);
   } else if (windowWidth < 850) {
-    slider.setAttribute('max', 60);
+    slider.setAttribute('max', 50);
+  } else {
+    slider.setAttribute('max', 75);
   }
 }
 
 function getPadding(windowWidth) {
   if (windowWidth > 1300) {
-    return 60;
+    return 90;
   }
   return 20;
 }
@@ -43,8 +46,8 @@ function setGridContainerDimensions() {
   const windowWidth = document.documentElement.getBoundingClientRect().width;
   const headerHeight = topInfo.offsetHeight;
   const padding = getPadding(windowWidth);
-  if (padding === 60) {
-    gridContainer.style.width = `${1400}px`;
+  if (padding > 20) {
+    gridContainer.style.width = `${1300}px`;
     gridContainer.style.height = gridContainer.style.width;
   } else {
     gridContainer.style.height = `${
