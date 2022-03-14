@@ -1,21 +1,29 @@
 const initialGridSize = 10;
 
 const resetButton = document.querySelector('.reset');
-const gridContainer = document.querySelector('.grid-container');
+// const gridContainer = document.querySelector('.grid-container');
 const topInfo = document.querySelector('.info');
 const slider = document.querySelector('.slider');
 const sliderDisplayValue = document.querySelector('.slider-value');
 const root = document.getElementsByTagName('html')[0];
-const show = document.querySelector('.show');
+const mainContainer = document.querySelector('.main-container');
 
-function createCells(container, columns, rows, widthOfCell) {
+let gridContainer;
+
+function createGridContainer() {
+  gridContainer = document.createElement('div');
+  gridContainer.classList = 'grid-container';
+  mainContainer.appendChild(gridContainer);
+}
+
+function createCells(columns, rows, widthOfCell) {
   const total = columns * Math.ceil(rows);
   for (let i = 0; i < total; i += 1) {
     const gridCell = document.createElement('div');
     gridCell.classList = 'cell colorCell0';
     gridCell.style.width = widthOfCell;
     gridCell.style.height = widthOfCell;
-    container.appendChild(gridCell);
+    gridContainer.appendChild(gridCell);
   }
 }
 
@@ -60,6 +68,7 @@ function setGridContainerDimensions() {
 }
 
 function createGrid(gridSize) {
+  createGridContainer();
   setMaxSlider();
   setGridContainerDimensions();
 
@@ -69,17 +78,16 @@ function createGrid(gridSize) {
   const columns = gridSize;
   const rows = gridHeight / widthOfCell;
 
-  createCells(gridContainer, columns, rows, widthOfCell);
-
   gridContainer.style.gridTemplateRows = `repeat(${rows}, ${widthOfCell}px`;
   gridContainer.style.gridTemplateColumns = `repeat(${columns}, ${widthOfCell}px`;
+
+  createCells(columns, rows, widthOfCell);
+
   cellsActiveListener();
 }
 
 function removeGrid() {
-  while (gridContainer.firstChild) {
-    gridContainer.removeChild(gridContainer.lastChild);
-  }
+  mainContainer.removeChild(mainContainer.lastChild);
 }
 
 function clearGrid() {
@@ -142,14 +150,25 @@ function cellsActiveListener() {
 
 createGrid(initialGridSize);
 
+let previousSliderValue;
 slider.addEventListener('mouseup', () => {
+  if (slider.value === previousSliderValue) {
+    clearGrid();
+    return;
+  }
   removeGrid();
   createGrid(slider.value);
+  previousSliderValue = slider.value;
 });
 
 slider.addEventListener('touchend', () => {
+  if (slider.value === previousSliderValue) {
+    clearGrid();
+    return;
+  }
   removeGrid();
   createGrid(slider.value);
+  previousSliderValue = slider.value;
 });
 
 slider.addEventListener('input', () => {
