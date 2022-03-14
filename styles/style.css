@@ -16,3 +16,37 @@ body {
 .cell {
   border: 1px solid black;
 }
+
+.colorCell0 {
+  background-color: rgba(0, 0, 0, 0);
+}
+.colorCell1 {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.colorCell2 {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.colorCell3 {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.colorCell4 {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.colorCell5 {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.colorCell6 {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.colorCell7 {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.colorCell8 {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.colorCell9 {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.colorCell10 {
+  background-color: rgba(0, 0, 0, 1);
+}

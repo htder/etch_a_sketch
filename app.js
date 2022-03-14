@@ -37,12 +37,13 @@ function createGrid(gridSize) {
     gridCell.classList.add('cell');
     gridCell.style.width = widthOfCell;
     gridCell.style.height = widthOfCell;
-    gridCell.style.backgroundColor = 'white';
+    gridCell.classList.add('colorCell0');
     gridContainer.appendChild(gridCell);
   }
 
   gridContainer.style.gridTemplateRows = `repeat(${rows}, ${widthOfCell}px`;
   gridContainer.style.gridTemplateColumns = `repeat(${columns}, ${widthOfCell}px`;
+  cellsActiveListener();
 }
 
 function removeGrid() {
@@ -52,12 +53,21 @@ function removeGrid() {
 }
 
 function cellOn() {
-  this.style.backgroundColor = 'black';
+  const currentStyleValue = +/\d+/.exec(this.classList[1]);
+  if (currentStyleValue === 10) return;
+  this.classList.remove(`colorCell${currentStyleValue}`);
+  this.classList.add(`colorCell${currentStyleValue + 2}`);
+  previousCell = this;
 }
 
+let previousCell;
 function touchDown(event) {
   event.preventDefault();
-  this.style.backgroundColor = 'black';
+  const currentStyleValue = +/\d+/.exec(this.classList[1]);
+  if (currentStyleValue === 10) return;
+  this.classList.remove(`colorCell${currentStyleValue}`);
+  this.classList.add(`colorCell${currentStyleValue + 2}`);
+  previousCell = this;
 }
 
 function touchMove(event) {
@@ -66,8 +76,12 @@ function touchMove(event) {
     event.changedTouches[0].clientX,
     event.changedTouches[0].clientY
   );
-  if (target.classList.contains('cell')) {
-    target.style.backgroundColor = 'black';
+  if (target.classList.contains('cell') && target !== previousCell) {
+    const currentStyleValue = +/\d+/.exec(target.classList[1]);
+    if (currentStyleValue === 10) return;
+    target.classList.remove(`colorCell${currentStyleValue}`);
+    target.classList.add(`colorCell${currentStyleValue + 2}`);
+    previousCell = target;
   }
 }
 
@@ -89,7 +103,6 @@ function cellsActiveListener() {
 }
 
 createGrid(initialGridSize);
-cellsActiveListener();
 
 slider.addEventListener('mouseup', () => {
   removeGrid();
