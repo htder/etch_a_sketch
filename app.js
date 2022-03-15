@@ -1,7 +1,6 @@
 const initialGridSize = 10;
 
 const resetButton = document.querySelector('.reset');
-// const gridContainer = document.querySelector('.grid-container');
 const topInfo = document.querySelector('.info');
 const slider = document.querySelector('.slider');
 const sliderDisplayValue = document.querySelector('.slider-value');
@@ -122,7 +121,7 @@ function touchMove(event) {
   event.preventDefault();
   const target = document.elementFromPoint(
     event.changedTouches[0].clientX,
-    event.changedTouches[0].clientY
+    event.changedTouches[0].clientY,
   );
   if (target.classList.contains('cell') && target !== previousCell) {
     const currentStyleValue = +/\d+/.exec(target.classList[1]);
