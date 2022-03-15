@@ -55,8 +55,12 @@ function setGridContainerDimensions() {
   const headerHeight = topInfo.offsetHeight;
   const padding = getPadding(windowWidth);
   if (padding > 20) {
-    gridContainer.style.width = `${1300}px`;
-    gridContainer.style.height = gridContainer.style.width;
+    // gridContainer.style.width = `${1200}px`;
+    // gridContainer.style.height = gridContainer.style.width;
+    gridContainer.style.height = `${
+      windowHeight - headerHeight - 1 * rootFontSize[0] - padding
+    }px`;
+    gridContainer.style.width = gridContainer.style.height;
   } else {
     gridContainer.style.height = `${
       windowHeight - headerHeight - 1 * rootFontSize[0] - padding
