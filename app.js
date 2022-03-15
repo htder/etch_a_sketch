@@ -55,8 +55,6 @@ function setGridContainerDimensions() {
   const headerHeight = topInfo.offsetHeight;
   const padding = getPadding(windowWidth);
   if (padding > 20) {
-    // gridContainer.style.width = `${1200}px`;
-    // gridContainer.style.height = gridContainer.style.width;
     gridContainer.style.height = `${
       windowHeight - headerHeight - 1 * rootFontSize[0] - padding
     }px`;
